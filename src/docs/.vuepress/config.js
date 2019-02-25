@@ -28,6 +28,7 @@ module.exports = {
 					children: [
 						//['', pluginIntro],
 						'using-pluging',
+						'chapter_1',
 					]
 				},
 			]

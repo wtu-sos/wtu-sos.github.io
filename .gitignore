@@ -1,3 +1,5 @@
 
 src/node_modules
 src/docs/.vuepress/dist
+src/docs/.idea/
+*.swp
