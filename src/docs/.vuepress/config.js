@@ -29,6 +29,7 @@ module.exports = {
 						//['', pluginIntro],
 						'using-pluging',
 						'chapter_1',
+						'item_1',
 					]
 				},
 			]

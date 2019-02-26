@@ -21,7 +21,7 @@ importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox
 self.__precacheManifest = [
   {
     "url": "404.html",
-    "revision": "c6cd13a118b6fa18b284ca55878fd691"
+    "revision": "fd8b1d4576e0d91e1a3c4469e7c54d9a"
   },
   {
     "url": "assets/css/0.styles.68be1f38.css",
@@ -40,36 +40,44 @@ self.__precacheManifest = [
     "revision": "ad07cffe71950f62e9c95bf8d55f9703"
   },
   {
-    "url": "assets/js/4.9986709a.js",
-    "revision": "5798bd02627418b881f567408db01006"
+    "url": "assets/js/4.5ead3816.js",
+    "revision": "723280e1742bb11d222c756444ec333d"
   },
   {
-    "url": "assets/js/5.fae694a6.js",
-    "revision": "89b38e1bd098d044ce8d5e5b4f4d80f0"
+    "url": "assets/js/5.f43b06ca.js",
+    "revision": "3c14908db1e6bf7b17e2c17c3b104901"
   },
   {
-    "url": "assets/js/6.2ee24170.js",
-    "revision": "ced0f97e505c4225011fec6a5bad4f63"
+    "url": "assets/js/6.ef1190b0.js",
+    "revision": "b0f120115da218efbe2bd8501435f350"
   },
   {
-    "url": "assets/js/7.c0f27700.js",
-    "revision": "88bdf9974790814db583e9304a50f330"
+    "url": "assets/js/7.d644c31b.js",
+    "revision": "dc46a007229cf822436a7c3cf9a5abb6"
   },
   {
-    "url": "assets/js/app.974f9227.js",
-    "revision": "1572e6fa1884c7599a7d5f3cf2726d4a"
+    "url": "assets/js/8.bd45e8df.js",
+    "revision": "96e584c7b994a13aa55791c93c33f368"
+  },
+  {
+    "url": "assets/js/app.f9769634.js",
+    "revision": "518323d822a2c36f523b672bbec48a16"
   },
   {
     "url": "catalogue/chapter_1.html",
-    "revision": "a5fd7138998e1c46e86e97eb15a00962"
+    "revision": "456bbf84cca880e66f58953d99c04fa8"
   },
   {
     "url": "catalogue/index.html",
-    "revision": "827faf2eb032fe8fa8a5a0f06841ec7b"
+    "revision": "70dbce5a5f71d5766193f427aea272e6"
+  },
+  {
+    "url": "catalogue/item_1.html",
+    "revision": "a5aed36b387cf5f23d7c3cf7a948b9d7"
   },
   {
     "url": "catalogue/using-pluging.html",
-    "revision": "6de242e7889141a952c5ab9ad2f10611"
+    "revision": "983936a6d9a310a4a107c68f2ea9887e"
   },
   {
     "url": "img/index.jpeg",
@@ -77,7 +85,7 @@ self.__precacheManifest = [
   },
   {
     "url": "index.html",
-    "revision": "7faad4a97f357f1e4770692d3165681f"
+    "revision": "47458b0155845a6b60e146812ba64db1"
   },
   {
     "url": "logo.png",
