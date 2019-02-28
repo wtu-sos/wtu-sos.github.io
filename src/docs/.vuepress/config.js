@@ -23,13 +23,13 @@ module.exports = {
 		sidebar:{
 			'/catalogue/': [
 				{
-					title: "Catalogue",
+					title: "Effective Modern C++",
 					collapsable: true,
 					children: [
 						//['', pluginIntro],
 						//'using-pluging',
 						'chapter_1',
-						'item_1',
+						'item_1'
 					]
 				},
 			]
