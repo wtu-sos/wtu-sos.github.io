@@ -66,4 +66,84 @@ f(cx);  // T is const int,
 f(rx);  // T is const int,
         // param's type is const int&
 ```
+注意第2个和3个函数调用,因为cx和rx指定为常量类型,T被推导成const int,因此产生了const int&的参数类型.这对调用者来说是很重要的.当调用者传递一个const对象给一个引用参数时,他们期望该对象能保持常量不被修改的特性,比如参数变成一个const引用.这也是为什么一个常量传递给一个接收T&参数类型的模板是安全的原因:对象的常量特性也是T类型推导的一部分.
 
+在第3个示例中,我们发现即使rx的类型是一个引用,T还是被推导成一个非引用类型.这是因为在类型推导过程中rx的引用我被忽略掉了.
+
+上面这些示例完整的展示了左值引用参数的推导,但是类型推导右值对引用参数的推导同样有效.当然,右值引用参数可能只能接收右值参数,但是这些限制与类型推导是无关的.
+
+如果我们把函数f的参数类型从T&变成const T&,结果就有一些变化了,但也不是无迹可循的.cx和rx的常量特性依然有效,但由于现在param的声明是一个const引用,所以我们就不再需要将const作为T类型推导的一部分了.
+
+``` cpp
+template<typename T>
+void f(const T& param);   // param is now a ref-to-const
+
+// as before
+int x = 27;               
+const int cx = x;
+const int& rx = x;
+
+f(x);                     // T is int, param's type is const int&
+f(cx);                    // T is int, param's type is const int&
+f(rx);                    // T is int, param's type is const int&
+```
+
+和之前一样,rx的引用特性在推导过程中被忽略掉了.
+
+如果参数是一个指针(或者一个指向常量的指针)而不是一个引用.类型推导本质上是一样的过程:
+``` cpp
+template<typename T>
+void f(T* param);          // param is a pointer now
+
+int x = 27;
+const int *px = &x;        // px is a ptr to x as a const int
+
+f(&x);                     // T is int, param's type is int*
+
+f(px);                     // T is const int
+                           param's type is const int*
+```
+
+到目前为止,你可能已经开始打瞌睡了.因为c++的类型推导规则对引用和指针类型的参数以这样的方式书写出来,是如此的自然,直白.所有的细节都显而易见.这应该就是你所需要的类型推导系统了.
+
+## 情景2: ParamType是一个通用引用
+当模板的参数类型是通用引用时推导规则便不是那么直观了.这些参数的声明看起来像是右值引用(比如:函数模板接收参数T,一个通用引用的声明类型为T&&),但当被传入的参数是一个左值时,他们的行为就不一样了.完整的内容将在条款24中详细说明,这里只是一个大概:
+ - 如果expr是一个左值,那么T和ParamType都会被推导成左值引用.这有些不同寻常.第一,T被推导成一个引用这在模板类型推导中是一个特例.第二,虽然ParamType是用右值引用的语法声明的.但最终它推导出来的类型是一个左值引用.
+ - 如果expr是一个右值,那将应用普通的规则(如情况1).
+示例:
+``` cpp
+template<typename T>
+void f(T&& param);              // param is now a universal refernce
+
+// as before
+int x = 27;               
+const int cx = x;
+const int& rx = x;
+
+f(x);                           // x 是一个左值,因此T是int&,
+                                // param的类型也是int&
+
+f(cx);                          // cx是一个左值,因此T是const int&,
+                                // param的类型也是const int&
+
+f(rx);                          // rx是一个左值,因此T是const int&,
+                                // param的类型也是const int&
+
+f(27);                          // 27是一个右值,因此T是 int,
+                                // param的类型是int&&,
+
+```
+
+条款24详细的解释了这些示例这样推导的原因.关键点是通用引用参数的类型推导规则与左值引用或者右值引用是不同的.通常,在使用通用引用的时候,类型推导要区分左值还是右值,这在非通用引用参数推导的时候是绝对不会发生的.
+
+## 情景3: ParamType既不是指针,也不是引用
+
+当ParamType既不是指针,也不是引用时,我们将它做为值传递来处理:
+``` cpp
+template<typename T>
+void f(T param);            // param is now passed by value
+```
+
+这意味着param将是传入参数的一个拷贝----一个全新的对象.根据param将会成一个新对象的情况产生如何从expr推导出T的类型的规则:
+1. 与之前一样,如果expr的类型是引用,则忽略引用部分.
+2. 如果在忽略expr类型的引用特性后,如果expr是const,那么也忽略掉const.如果是volatile,同样忽略掉.(volatile对象并不常见,它们通常被用在实现设备驱动程序上.更多细节参考条款40).

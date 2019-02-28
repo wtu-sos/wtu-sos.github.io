@@ -27,7 +27,7 @@ module.exports = {
 					collapsable: true,
 					children: [
 						//['', pluginIntro],
-						'using-pluging',
+						//'using-pluging',
 						'chapter_1',
 						'item_1',
 					]
