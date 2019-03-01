@@ -147,3 +147,32 @@ void f(T param);            // param is now passed by value
 这意味着param将是传入参数的一个拷贝----一个全新的对象.根据param将会成一个新对象的情况产生如何从expr推导出T的类型的规则:
 1. 与之前一样,如果expr的类型是引用,则忽略引用部分.
 2. 如果在忽略expr类型的引用特性后,如果expr是const,那么也忽略掉const.如果是volatile,同样忽略掉.(volatile对象并不常见,它们通常被用在实现设备驱动程序上.更多细节参考条款40).
+
+于是:
+``` cpp
+// as before
+int x = 27;               
+const int cx = x;
+const int& rx = x;
+
+f(x);                           // x和param的类型都int
+
+f(cx);                          // x和param的类型都int
+
+f(rx);                          // x和param的类型都int
+
+```
+注意,即使变量cx和rx是cosnt变量,但param不是const.这是正常的.param是独立于cx和rx的一个完整的拷贝.事实上,无论param发生任何修改,cx和rx都不会被修改.这也是为什么param的类型推导过程中expr的const特性(vaolatile特性,或者其它)被忽略的原因:expr无法被修改,并不意味着他的拷贝也无法被修改.
+
+重要的是要意识到仅仅当参数是通过值传递时const特性(和volatile特性)才可以被忽略.正如我们所见的,当参数是const引用或者const指针时,expr的const特性被保留(并未传递).但考虑到当expr是一个常量指针指向一个常量时,expr将会通过传值的方式被传递给param:
+
+``` cpp 
+template<typename T>
+void f(T param);
+
+const char* const ptr = "Fun with pointers";
+
+f(ptr);			// pass arg of type const char* const
+```
+
+这里,星号右边的const表示指针被声明为一个常量:无法修改指针使其指向另一个地址,或者设置成空指针.(星号左边的指针表示指针指向的字符串是一个常量).当ptr被传给f时,组成指针的bit被的拷贝给param.这样,指针本身将会被通过值的方式传递.根据参数值传递的类型推导规则,ptr的const特性将被忽略,因经param的类型将被推导成const char*,比如指向常量字符串的可变指针.ptr指针指向类型的const特性在类型推导的过程中被保留,但ptr自身的cosnt特性会在拷贝创建新的指针param时被忽略.
