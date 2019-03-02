@@ -173,6 +173,105 @@ void f(T param);
 const char* const ptr = "Fun with pointers";
 
 f(ptr);			// pass arg of type const char* const
+
 ```
 
 这里,星号右边的const表示指针被声明为一个常量:无法修改指针使其指向另一个地址,或者设置成空指针.(星号左边的指针表示指针指向的字符串是一个常量).当ptr被传给f时,组成指针的bit被的拷贝给param.这样,指针本身将会被通过值的方式传递.根据参数值传递的类型推导规则,ptr的const特性将被忽略,因经param的类型将被推导成const char*,比如指向常量字符串的可变指针.ptr指针指向类型的const特性在类型推导的过程中被保留,但ptr自身的cosnt特性会在拷贝创建新的指针param时被忽略.
+
+### 数组参数
+这个在普通模板类型推导中比较常见,看还是有一些细节需要注意.虽然它看起来有时候和指针类型差不多,但还是有一些不一样的.造成这种错觉的主要原因是在许多情况中,数组退化成了指针第一个元素的指针.这种允许退化的代码通常像这样的: 
+
+``` cpp 
+const char name[] = "J. P. Briggs";
+
+const char* ptrToName = name;
+```
+
+这里,const char*类型的指针ptrToName通过const char[13]类型变量name初始化.这两个类型并不相同,但由于数组到指针的退化规则,所以代码能通过编译.
+
+但如果数组是以值传递的方式传递给模板参数的时候,会发生什么呢?
+
+``` cpp
+template<typename T>
+void f(T param);
+
+f(name);
+```
+我们从一个非模板的以数组为参数的函数开始.是的,这样的语法是合法的:
+``` cpp
+void myFunc(int param[]);
+```
+但这数组的声明其实是一个指针声明的包装,意味着myFunc函数与这样的声明是等价的:
+``` cpp
+void myFunc(int* param);
+```
+
+这样数组与指针的等价声明会经常出现在以C为基础的C++语言中,这也进一步导致了数组类型与指针类型是等价的错误.
+
+因为数组类型的参数声明被视为指针类型,所以当数组类型被通过值传递给模板函数时,参数类型将会被推导成指针类型.这意味着当我们调用函数f时,它的参数类型T被推导成const char*: 
+
+``` cpp
+f(name);	 // name是数组,但T的类型是const char*
+```
+但是我们可以曲线救国.虽然函数没办法声明参数类型是一个真实的数组,但是可以声明参数类型是数组引用!因此我们修改模板函数f使它接受引用参数,
+``` cpp
+template<typename T>
+void f(T& param);		 // template with by reference parameter
+```
+
+我们这样调用它:
+
+``` cpp
+f(name);	   // pass array to f
+```
+
+T最后推导出来的真实类型就是数组!推导出来的数组类型包含了数据的大小,所以在上面这个示例中,T被推导为const char[13],模板函数f的参数类型(对该数组的引用)是const char(&)[13].是的,这语法看起来很糟糕,但知道它会从很少的人那里得到很多信任和赞赏。(原文:but konwing it will score you mondo points with those few souls who care. 同义句: but knowing it will get you a lot of credit and appreciation from the few people who care.)
+
+有趣的是,利用创建的引用数组声明的模板函数还能推导出数组包含元素的个数:
+``` cpp
+template<typename T, std::size_t N>
+constexpr std::size_t arraySize(T(&)[N]) noexcept 
+{
+	return N;
+}
+```
+
+在条款15中有说明,为这个函数声明constexpr使的函数的返回值在编译期可见.这使得我们可以根据一个从大括号初始化的数组来创建一个具有同样大小的数组:
+``` cpp
+int keyVals[] = {1, 3, 7, 9, 11, 22, 35}; // keyVals有七个元素
+
+int mappedVals[arraySize(keyVals)];       // mappedVals同样也有七个元素
+```
+
+当然,作为现在c++开发人员,相比内置的数组你可能会更喜欢std::array:
+``` cpp
+std::array<int, arraySize(keyVals)> mappedVals;  // mappedVals同样也有七个元素
+```
+至于为什么要声明为noexcept,这是为了帮助编译器更好的生成代码.具体细节可以参考条款14.
+
+### 函数参数
+在C++中,不仅仅只有数组是能退化成指针的类型.函数类型也能退化成函数指针,之前我们所讨论的关于的数组类型推导的任何东西也同样适用于函数推导和函数类型退化成函数指针:
+``` cpp
+void someFunc(int, double);       // 类型: void (int, double)
+
+template<typename T>
+void f1(T param);               
+
+template<typename T>
+void f2(T& param);
+
+f1(someFunc);                     // T and param: void(*)(int, double)
+
+f2(someFunc);                     // T: void(int, double)
+                                  // param: void(&)(int, double)
+```
+这在实际中只有很少的一些差异, 如果你知道数组到指针的退化,那么你一般也知道函数到指针的退化.
+
+到目前为止你的收获是:模板中类型推导的类型自动关联规则.我把他们之中最重要的部分在下方列了出来.为通用引用接受左值做的类型推导时的特殊处理可能有点混乱,然而,如果加上数组与函数的退化为指针的规则可能会变的更加的混乱.有时,你可能想抓住你的编译器并要求,"告诉我推导出了什么类型!".当你有这个想法的时候,可以查看条款4,因为它的致力于让编译做到这些.
+
+| 要记住的|
+|---------|
+| 1. 在模板推导过程中,引用类型的参数将会变为非引用类型,因为它们的引用特性将会被忽略. |
+| 2. 当通用引用类型参数进行类型推导的时候,左值参数需要特殊处理. |
+| 3. 当按值传递的参数进行类型推导时,参数的const特性或者volatile特性都会被忽略. |
+| 4. 在模板类型推导过程中,数组或者函数类型的参数都会退化为指针,除非它们被用于初始化引用类型. |
