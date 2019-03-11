@@ -30,7 +30,8 @@ module.exports = {
 						//'using-pluging',
 						'chapter_1',
 						'item_1',
-						'item_2'
+						'item_2',
+						'item_3'
 					]
 				},
 			]

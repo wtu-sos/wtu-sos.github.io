@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>条款3: 理解decltype | 个人主页</title>
+    <meta name="description" content="Personal Website">
+    <link rel="icon" href="favicon.ico">
+    
+    <link rel="preload" href="/assets/css/0.styles.68be1f38.css" as="style"><link rel="preload" href="/assets/js/app.e884350c.js" as="script"><link rel="preload" href="/assets/js/8.0fac3865.js" as="script"><link rel="prefetch" href="/assets/js/10.d4ccc670.js"><link rel="prefetch" href="/assets/js/2.0f4038f2.js"><link rel="prefetch" href="/assets/js/3.b75823bc.js"><link rel="prefetch" href="/assets/js/4.89e7abcb.js"><link rel="prefetch" href="/assets/js/5.9d5719aa.js"><link rel="prefetch" href="/assets/js/6.3c5ab834.js"><link rel="prefetch" href="/assets/js/7.cacef186.js"><link rel="prefetch" href="/assets/js/9.7f369a2e.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.68be1f38.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">个人主页</span></a> <div class="links" style="max-width:nullpx;"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <!----></div></header> <div class="sidebar-mask"></div> <div class="sidebar"><!---->  <ul class="sidebar-links"><li><div class="sidebar-group first collapsable"><p class="sidebar-heading open"><span>Effective Modern C++</span> <span class="arrow down"></span></p> <ul class="sidebar-group-items"><li><a href="/catalogue/chapter_1.html" class="sidebar-link">类型推导</a></li><li><a href="/catalogue/item_1.html" class="sidebar-link">条款1: 理解模板类型推导</a></li><li><a href="/catalogue/item_2.html" class="sidebar-link">条款2: 理解auto类型推导</a></li><li><a href="/catalogue/item_3.html" class="active sidebar-link">条款3: 理解decltype</a></li></ul></div></li></ul> </div> <div class="page"> <div class="content"><h1 id="条款3-理解decltype"><a href="#条款3-理解decltype" aria-hidden="true" class="header-anchor">#</a> 条款3: 理解decltype</h1> <p>decltype是一个怪异的产物.提供一个名字或者表达式,decltype告诉你这个名字或者表达式的类型.典型的就是告诉你你所预测的类型确实是什么.然后,偶尔它提供的结果会让你抓狂,然后不得不去翻阅相关文档或者在线Q&amp;A网站寻求帮助.</p> <p>我们将从一些常见的典型案例开始.相对于模板和auto类型的推导过程中所产生的行为(详见条款1和2),
+decltype只是复述了你提供的名字或者表达式的实际类型:</p> <div class="language-cpp line-numbers-mode"><pre class="language-cpp"><code><span class="token keyword">const</span> <span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>             <span class="token comment">// decltype(i) 是const int</span>
+
+<span class="token keyword">bool</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token keyword">const</span> Widget<span class="token operator">&amp;</span> w<span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token comment">// decltype(w) 是Widget&amp;</span>
+                             <span class="token comment">// decltype(f) 是bool (const Widget&amp;)</span>
+
+<span class="token keyword">struct</span> Point <span class="token punctuation">{</span>               <span class="token comment">// decltyp(Point::x)和decltype(Point::y)都是int</span>
+	<span class="token keyword">int</span> x<span class="token punctuation">,</span> y<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+Widget w<span class="token punctuation">;</span>                    <span class="token comment">// decltype(w) 是Widget</span>
+
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">f</span><span class="token punctuation">(</span>w<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>                <span class="token comment">// decltype(f(w)) 是bool</span>
+
+<span class="token keyword">template</span><span class="token operator">&lt;</span><span class="token keyword">typename</span> T<span class="token operator">&gt;</span>
+<span class="token keyword">class</span> <span class="token class-name">vector</span> <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+	<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+	T<span class="token operator">&amp;</span> <span class="token keyword">operator</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token punctuation">(</span>std<span class="token operator">::</span>size_t index<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> v<span class="token punctuation">;</span>               <span class="token comment">// decltype 是vector&lt;int&gt;</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+
+<span class="token keyword">if</span> <span class="token punctuation">(</span>v<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>           <span class="token comment">// decltype 是int&amp;</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br></div></div><p>如你所见,毫无惊喜.</p> <p>在C++11中,decltype主要用途就是声明一个函数返回值类型依赖参数类型的模板函数.例如,假设我们想实现一个接受支持索引访问的容器(比如使用<code>[]</code>)和一个索引,然后验证合法性并返回索引操作的结果.这个函数的返回值类型应该与索引操作的返回值类型相同.
+类型T的对象容器的索引操作通常返回一个T&amp;类型.例如,这是<code>std::deque</code>的情况,而且对于<code>std::vector</code>也几乎如此.但是对于<code>std::vector&lt;bool&gt;</code>,索引操作并不是返回bool&amp;,而是返回一个新的对象.至于这种情形的原理以及细节将在条款6中详细解释,这里我们关注的重点是返回值的类型依赖容器的索引操作的返回值类型.
+decltype使这种情况表达起来更为简单.这里是我们想要编写的第一个模板代码片断,展示了如何使用decltype来计算返回值类型.这段代码需要一些优化,但我们现在暂不考虑:</p> <div class="language-cpp line-numbers-mode"><pre class="language-cpp"><code><span class="token keyword">template</span><span class="token operator">&lt;</span><span class="token keyword">typename</span> Container<span class="token punctuation">,</span> <span class="token keyword">typename</span> Index<span class="token operator">&gt;</span>
+<span class="token keyword">auto</span> <span class="token function">authAndAccess</span><span class="token punctuation">(</span>Container<span class="token operator">&amp;</span> c<span class="token punctuation">,</span> Index i<span class="token punctuation">)</span>
+	<span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token keyword">decltype</span><span class="token punctuation">(</span>c<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+	<span class="token function">authenticateUser</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">return</span> c<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><p>这个模板函数名字前面的auto不做任何的类型推导.更确切的说,它象征着这里使用了c++11的尾部返回类型语法,也就是函数的返回值类型被声明在参数列表后面(在&quot;-&gt;&quot;符号后面).尾部返回类型对于函数参数指定函数的返回类型来说是有优势的.例如,在函数authAndAccess中,我们通过使用c和i来指定返回值类型.如果我们使用传统语法返回值类型在函数名前方的话,c和i将是不合法的,因为它们这个时候还没有被声明.</p> <p>通过这样的声明,authAndAccess的返回值类型就是传入的容器的索引操作(&quot;[]&quot;)所返回的类型,这正是我们所需要的.</p> <p>C++11允许单语句的lambada函数的返回值类型被推导,在C++14中将这个扩展到了所有的多语句的lambada表达式和函数.这意味着,在C++14中我们可以直接忽略尾部返回值类型,直接使用auto作为前置函数返回值类型.使用这种方式声明,意味着将会使用类型推导.通常,这意味着编译器将会根据函数的实现来推导函数的返回值类型:</p> <div class="language-cpp line-numbers-mode"><pre class="language-cpp"><code><span class="token keyword">template</span><span class="token operator">&lt;</span><span class="token keyword">typename</span> Container<span class="token punctuation">,</span> <span class="token keyword">typename</span> Index<span class="token operator">&gt;</span>
+<span class="token keyword">auto</span> <span class="token function">authAndAccess</span><span class="token punctuation">(</span>Container<span class="token operator">&amp;</span> c<span class="token punctuation">,</span> Index i<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+	<span class="token function">authenticateUser</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">return</span> c<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div></div> <div class="page-edit"><!----> <!----></div> <div class="page-nav"><p class="inner"><span class="prev">
+        ←
+        <a href="/catalogue/item_2.html" class="prev">
+          条款2: 理解auto类型推导
+        </a></span> <!----></p></div> </div> <!----></div></div>
+    <script src="/assets/js/app.e884350c.js" defer></script><script src="/assets/js/8.0fac3865.js" defer></script>
+  </body>
+</html>
