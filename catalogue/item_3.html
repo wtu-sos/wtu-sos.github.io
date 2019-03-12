@@ -7,7 +7,7 @@
     <meta name="description" content="Personal Website">
     <link rel="icon" href="favicon.ico">
     
-    <link rel="preload" href="/assets/css/0.styles.68be1f38.css" as="style"><link rel="preload" href="/assets/js/app.e884350c.js" as="script"><link rel="preload" href="/assets/js/8.0fac3865.js" as="script"><link rel="prefetch" href="/assets/js/10.d4ccc670.js"><link rel="prefetch" href="/assets/js/2.0f4038f2.js"><link rel="prefetch" href="/assets/js/3.b75823bc.js"><link rel="prefetch" href="/assets/js/4.89e7abcb.js"><link rel="prefetch" href="/assets/js/5.9d5719aa.js"><link rel="prefetch" href="/assets/js/6.3c5ab834.js"><link rel="prefetch" href="/assets/js/7.cacef186.js"><link rel="prefetch" href="/assets/js/9.7f369a2e.js">
+    <link rel="preload" href="/assets/css/0.styles.68be1f38.css" as="style"><link rel="preload" href="/assets/js/app.2a183109.js" as="script"><link rel="preload" href="/assets/js/8.a1428843.js" as="script"><link rel="prefetch" href="/assets/js/10.d4ccc670.js"><link rel="prefetch" href="/assets/js/2.0f4038f2.js"><link rel="prefetch" href="/assets/js/3.b75823bc.js"><link rel="prefetch" href="/assets/js/4.89e7abcb.js"><link rel="prefetch" href="/assets/js/5.9d5719aa.js"><link rel="prefetch" href="/assets/js/6.3c5ab834.js"><link rel="prefetch" href="/assets/js/7.cacef186.js"><link rel="prefetch" href="/assets/js/9.7f369a2e.js">
     <link rel="stylesheet" href="/assets/css/0.styles.68be1f38.css">
   </head>
   <body>
@@ -52,11 +52,21 @@ decltype使这种情况表达起来更为简单.这里是我们想要编写的�
 	<span class="token function">authenticateUser</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 	<span class="token keyword">return</span> c<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div></div> <div class="page-edit"><!----> <!----></div> <div class="page-nav"><p class="inner"><span class="prev">
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><p>条款2说明了通过auto指定返回值类型的函数,编译器会使用模板类型推导.但在这种情况下,这是有问题的.正如我们之前讨论过的,大多数容器的索引操作返回一个T&amp;引用类型,但条款1的说明了在模板类型推导过程中,表达式的引用特性将会被忽略掉.思考下下面这段代码的含义:</p> <div class="language-cpp line-numbers-mode"><pre class="language-cpp"><code>std<span class="token operator">::</span>deque<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> d<span class="token punctuation">;</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> 
+<span class="token function">autoAndAccess</span><span class="token punctuation">(</span>d<span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><p>这里,<code>d[5]</code>的类型是<code>int&amp;</code>,但auto对于函数<code>autoAndAccess</code>的返回值类型推导中将会去掉引用,因此,返回值类型是int.这表明,函数返回了一个值类型,是一个右值,上面的代码试图给一个右值整理变量赋值10.这在C++中是被禁止的,因此这段代码是无法通过编译的.</p> <p>如果我们想要这段代码能够工作,那么我们需要decltype类型推导来声明函数的返回值类型,比如:指定authAndAccess函数返回类型与表达式<code>c[i]</code>的类型相同.c++委员会在C++14中通过<code>decltype(auto)</code>标识符使得在一些类型推导情况中使用decltype类型推导规则成为可能.这使得decltype和auto原来相互矛盾的关键字一起发挥了完美的作用:auto指定类型需要被推导,decltype表示推导过程中使用decltype类型推导规则.因此我们可以像这样来重写authAndAccess函数:</p> <div class="language-cpp line-numbers-mode"><pre class="language-cpp"><code><span class="token keyword">template</span><span class="token operator">&lt;</span><span class="token keyword">typename</span> Container<span class="token punctuation">,</span> <span class="token keyword">typename</span> Index<span class="token operator">&gt;</span>
+<span class="token keyword">decltype</span><span class="token punctuation">(</span><span class="token keyword">auto</span><span class="token punctuation">)</span>
+<span class="token function">authAndAccess</span><span class="token punctuation">(</span>Container<span class="token operator">&amp;</span> c<span class="token punctuation">,</span> Index i<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+	<span class="token function">authenticateUser</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">return</span> c<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><p>现在authAndAccess将会真正的返回c[i]所返回的类型.通常,当c[i]返回一个T&amp;时,authAndAccess也会返回一个T&amp;,当c[i]返回一个对象实例时,authAndAccess也返回一个对象实例.</p> <p><code>decltype(auto)</code>不仅仅用于函数的返回值类型.当你想要应用decltype类型推导规则来初始化一个表达式时也可以用它来便捷的声明的变量:</p></div> <div class="page-edit"><!----> <!----></div> <div class="page-nav"><p class="inner"><span class="prev">
         ←
         <a href="/catalogue/item_2.html" class="prev">
           条款2: 理解auto类型推导
         </a></span> <!----></p></div> </div> <!----></div></div>
-    <script src="/assets/js/app.e884350c.js" defer></script><script src="/assets/js/8.0fac3865.js" defer></script>
+    <script src="/assets/js/app.2a183109.js" defer></script><script src="/assets/js/8.a1428843.js" defer></script>
   </body>
 </html>

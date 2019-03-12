@@ -59,3 +59,24 @@ auto authAndAccess(Container& c, Index i)
 	return c[i];
 }
 ```
+条款2说明了通过auto指定返回值类型的函数,编译器会使用模板类型推导.但在这种情况下,这是有问题的.正如我们之前讨论过的,大多数容器的索引操作返回一个T&引用类型,但条款1的说明了在模板类型推导过程中,表达式的引用特性将会被忽略掉.思考下下面这段代码的含义:
+``` cpp
+std::deque<int> d;
+... 
+autoAndAccess(d, 5) = 10;
+```
+这里,`d[5]`的类型是`int&`,但auto对于函数`autoAndAccess`的返回值类型推导中将会去掉引用,因此,返回值类型是int.这表明,函数返回了一个值类型,是一个右值,上面的代码试图给一个右值整理变量赋值10.这在C++中是被禁止的,因此这段代码是无法通过编译的.
+
+如果我们想要这段代码能够工作,那么我们需要decltype类型推导来声明函数的返回值类型,比如:指定authAndAccess函数返回类型与表达式`c[i]`的类型相同.c++委员会在C++14中通过`decltype(auto)`标识符使得在一些类型推导情况中使用decltype类型推导规则成为可能.这使得decltype和auto原来相互矛盾的关键字一起发挥了完美的作用:auto指定类型需要被推导,decltype表示推导过程中使用decltype类型推导规则.因此我们可以像这样来重写authAndAccess函数:
+``` cpp
+template<typename Container, typename Index>
+decltype(auto)
+authAndAccess(Container& c, Index i)
+{
+	authenticateUser();
+	return c[i];
+}
+```
+现在authAndAccess将会真正的返回c[i]所返回的类型.通常,当c[i]返回一个T&时,authAndAccess也会返回一个T&,当c[i]返回一个对象实例时,authAndAccess也返回一个对象实例.
+
+`decltype(auto)`不仅仅用于函数的返回值类型.当你想要应用decltype类型推导规则来初始化一个表达式时也可以用它来便捷的声明的变量:
