@@ -21,7 +21,7 @@ importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox
 self.__precacheManifest = [
   {
     "url": "404.html",
-    "revision": "abe547dab09377df32f259177c8ee0fd"
+    "revision": "d79b749ce48863928d3ea0063f25eb20"
   },
   {
     "url": "assets/css/0.styles.68be1f38.css",
@@ -60,40 +60,40 @@ self.__precacheManifest = [
     "revision": "c241d0a17916a38b7dde2178658a3a66"
   },
   {
-    "url": "assets/js/8.a1428843.js",
-    "revision": "b1d54629a8b616d9504dbce96668c223"
+    "url": "assets/js/8.850ecf65.js",
+    "revision": "3582c2f5e42b24bf2e6d177a09e2a839"
   },
   {
     "url": "assets/js/9.7f369a2e.js",
     "revision": "022511354a6caf4df67e711c7f1ca68b"
   },
   {
-    "url": "assets/js/app.2a183109.js",
-    "revision": "c00a6cdff66dee72123dccbf0312d3ff"
+    "url": "assets/js/app.655c0cb3.js",
+    "revision": "7c0d155edf406bceeeecc35856eee44e"
   },
   {
     "url": "catalogue/chapter_1.html",
-    "revision": "df686f2eacb613a9f80d7546558fa9ab"
+    "revision": "9e7e95e930c5f7ae71eeb840463e97cd"
   },
   {
     "url": "catalogue/index.html",
-    "revision": "06cd32e21e4b68cc68cf0fcd653d8375"
+    "revision": "4298b06ef02834b9edc3a443c5139507"
   },
   {
     "url": "catalogue/item_1.html",
-    "revision": "f40d01a6742ee76d1fc0d4cf99327ed7"
+    "revision": "e4f796638cabe311489acaa0e9e8c053"
   },
   {
     "url": "catalogue/item_2.html",
-    "revision": "f58c2ee630a88158a4ee5ea95d0feb7e"
+    "revision": "74121cf98dad8595ecc14b1990b937e4"
   },
   {
     "url": "catalogue/item_3.html",
-    "revision": "d2135744e01aa203a3436a487e849e19"
+    "revision": "2ede94ed3453218c1ce5d727ffa06266"
   },
   {
     "url": "catalogue/using-pluging.html",
-    "revision": "f9670c611734b633ec133ef6b21221c8"
+    "revision": "51c117ffd2e60e9f5fb7b04f28eaa8b4"
   },
   {
     "url": "img/index.jpeg",
@@ -101,7 +101,7 @@ self.__precacheManifest = [
   },
   {
     "url": "index.html",
-    "revision": "cb86298e6c22d6170f712817ba4411bf"
+    "revision": "3bd3ce8ee02d6c3c084190735ea8859c"
   },
   {
     "url": "logo.png",
