@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>条款4 : 了解如何查看推导类型 | 个人主页</title>
+    <meta name="description" content="Personal Website">
+    <link rel="icon" href="favicon.ico">
+    
+    <link rel="preload" href="/assets/css/0.styles.68be1f38.css" as="style"><link rel="preload" href="/assets/js/app.ef26ff44.js" as="script"><link rel="preload" href="/assets/js/9.0700ec8c.js" as="script"><link rel="prefetch" href="/assets/js/10.f414d3c3.js"><link rel="prefetch" href="/assets/js/11.d3017caf.js"><link rel="prefetch" href="/assets/js/2.0f4038f2.js"><link rel="prefetch" href="/assets/js/3.33016a9b.js"><link rel="prefetch" href="/assets/js/4.0e5bb390.js"><link rel="prefetch" href="/assets/js/5.04dc520b.js"><link rel="prefetch" href="/assets/js/6.e8c870e8.js"><link rel="prefetch" href="/assets/js/7.1cb706cb.js"><link rel="prefetch" href="/assets/js/8.ea1d7513.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.68be1f38.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">个人主页</span></a> <div class="links" style="max-width:nullpx;"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <!----></div></header> <div class="sidebar-mask"></div> <div class="sidebar"><!---->  <ul class="sidebar-links"><li><div class="sidebar-group first collapsable"><p class="sidebar-heading open"><span>Effective Modern C++</span> <span class="arrow down"></span></p> <ul class="sidebar-group-items"><li><a href="/catalogue/chapter_1.html" class="sidebar-link">类型推导</a></li><li><a href="/catalogue/item_1.html" class="sidebar-link">条款1: 理解模板类型推导</a></li><li><a href="/catalogue/item_2.html" class="sidebar-link">条款2: 理解auto类型推导</a></li><li><a href="/catalogue/item_3.html" class="sidebar-link">条款3: 理解decltype</a></li><li><a href="/catalogue/item_4.html" class="active sidebar-link">条款4 : 了解如何查看推导类型</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/catalogue/item_4.html#ide-集成开发环境-编辑器" class="sidebar-link">IDE(集成开发环境)编辑器</a></li><li class="sidebar-sub-header"><a href="/catalogue/item_4.html#编译器诊断" class="sidebar-link">编译器诊断</a></li></ul></li></ul></div></li></ul> </div> <div class="page"> <div class="content"><h1 id="条款4-了解如何查看推导类型"><a href="#条款4-了解如何查看推导类型" aria-hidden="true" class="header-anchor">#</a> 条款4 : 了解如何查看推导类型</h1> <p>用于查看类型推导结果的工具的选择取决于在软件开发过程的阶段您想要信息.我们将说明三种可能:</p> <ol><li>在你编写代码的时候获取类型推导信息.</li> <li>在编译的时候获取类型推导信息.</li> <li>在运行时获取类型推导信息.</li></ol> <h2 id="ide-集成开发环境-编辑器"><a href="#ide-集成开发环境-编辑器" aria-hidden="true" class="header-anchor">#</a> IDE(集成开发环境)编辑器</h2> <p>IDE中的代码编辑器在你将鼠标放在你要显示的代码上时通常会显示代码的类型(例如:变量,参数,函数等).比如下列代码:</p> <div class="language-cpp line-numbers-mode"><pre class="language-cpp"><code><span class="token keyword">const</span> <span class="token keyword">int</span> theAnswer <span class="token operator">=</span> <span class="token number">42</span><span class="token punctuation">;</span>
+
+<span class="token keyword">auto</span> x <span class="token operator">=</span> theAnswer<span class="token punctuation">;</span>
+<span class="token keyword">auto</span> y <span class="token operator">=</span> <span class="token operator">&amp;</span>theAnswer<span class="token punctuation">;</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><p>IDE的编辑器将会显示x的推导类型是int,y的推导类型是const int*.
+想要这个功能生效,你的代码至少是需要可通过编译的,因为使IDE能提供这类型信息的其实是运行于IDE内部的一个C++编译器(或者编译器前端).如果编译器无法解析你的代码并执行类型推导,那么它将无法为你显示它推导的类型.</p> <p>对于像int这样的简单类型,IDE提供的信息是有效的.然后,我们即将看到的,当要推导的类型更加复杂的时候,IDE所提供的信息可能并不是很有帮助.</p> <h2 id="编译器诊断"><a href="#编译器诊断" aria-hidden="true" class="header-anchor">#</a> 编译器诊断</h2> <p>一个让编译器显示它所推导的类型的有效的方法是想办法让这个类型造成一个编译错误.报告问题的错误信息将会明确的提示造成这个问题的类型.</p></div> <div class="page-edit"><!----> <!----></div> <div class="page-nav"><p class="inner"><span class="prev">
+        ←
+        <a href="/catalogue/item_3.html" class="prev">
+          条款3: 理解decltype
+        </a></span> <!----></p></div> </div> <!----></div></div>
+    <script src="/assets/js/app.ef26ff44.js" defer></script><script src="/assets/js/9.0700ec8c.js" defer></script>
+  </body>
+</html>
