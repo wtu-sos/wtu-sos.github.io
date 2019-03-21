@@ -19,3 +19,31 @@ IDE的编辑器将会显示x的推导类型是int,y的推导类型是const int*.
 
 ## 编译器诊断
 一个让编译器显示它所推导的类型的有效的方法是想办法让这个类型造成一个编译错误.报告问题的错误信息将会明确的提示造成这个问题的类型.
+
+例如:假如我们想要查看上面那段示例中推导出来的类型.我们首先可以声明一个未定义的模板.像这样:
+``` cpp
+template<typename T>
+class TD;
+
+```
+使用这个模板来初始化一个对象将会产生错误信息,因为没有可以用于初始化对象的模板定义.想要看x和y的类型,只需要使用TD来初始化对应的类型:
+``` cpp 
+TD<decltype(x)> xType;    // 产生的错误包含x和y的类型
+TD<decltype(y)> xType;
+```
+我使用变量名+Type的格式来给变量命名,因为这样可以帮助我在返回的错误找到我想要的信息.针对上面的代码,下方的问题描述是我的编译的的诊断信息中的一部分(我已经把我们注意的部分高亮了):
+``` 
+error: aggregate 'TD<int> xType' has incomplete type and cannot be defined
+error: aggregate 'TD<const int*> yType' has incomplete type and cannot be defined
+```
+不同的编译器以不同的格式提供相同的信息:
+```
+error: 'xType' uses undefined class 'TD<int>'
+error: 'yType' uses undefined class 'TD<const int *>'
+
+```
+
+除了格式不一样外,我测试过的所有编译器在应用这个技术的时候,都会产生带有有用的类型信息错误信息.
+
+## 运行时输出
+`printf`显示类型信息的方法无法在程序运行前使用(我并不是推荐你使用`printf`方法),但它可以提供各种各样的输出格式.但是要创建一个合适的格式的文本来体现你所你状态的类型信息并不容易."这还不简单",你可能会这么想,""
