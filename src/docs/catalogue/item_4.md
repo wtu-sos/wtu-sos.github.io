@@ -37,13 +37,35 @@ error: aggregate 'TD<int> xType' has incomplete type and cannot be defined
 error: aggregate 'TD<const int*> yType' has incomplete type and cannot be defined
 ```
 不同的编译器以不同的格式提供相同的信息:
-```
+``` 
 error: 'xType' uses undefined class 'TD<int>'
 error: 'yType' uses undefined class 'TD<const int *>'
-
 ```
 
 除了格式不一样外,我测试过的所有编译器在应用这个技术的时候,都会产生带有有用的类型信息错误信息.
 
 ## 运行时输出
-`printf`显示类型信息的方法无法在程序运行前使用(我并不是推荐你使用`printf`方法),但它可以提供各种各样的输出格式.但是要创建一个合适的格式的文本来体现你所你状态的类型信息并不容易."这还不简单",你可能会这么想,""
+`printf`显示类型信息的方法无法在程序运行前使用(我并不是推荐你使用`printf`方法),但它可以提供各种各样的输出格式.但是要创建一个合适的格式的文本来体现你所你状态的类型信息并不容易."这还不简单",你可能会这么想,"直接使用`typeid`和`std::type_info::name`来显示就好了！",在后续探索对x和y的类型推导过程中，你会发现我们可以这样写：
+``` cpp
+// 显示x和y的类型名字 
+std::cout << typeid(x).name() << '\n' ;
+std::cout << typeid(y).name() << '\n' ;
+```
+这个实现是通过对类似x或y这样的对象调用typeid方法返回一个`type_info`对象,而`type_info`对象包含了一个叫name的成员函数，可以生成一个C风格字符串（如：const char×）来表示相应名字的类型.
+`std::type_info::name`仅是为了提供一些帮助并不保证返回值一定合理。仅提供有限的辅助。比如，gnu和clang编译器上报的x的类型是“i”，y的类型是“PKi”.一旦你理解了在这两个编译器的输出中“i”表示int类型，PKi表示"Point to Const int"(指向常量整形的指针),那结果就很容易理解了。(这两个编译器都支持解析复杂类型的工具：c++filt).Microsoft的编译器生成一个更直观的输出：x的类型是“int”,y的类型是"int const *".
+
+因为这些结果对于x和y的类型来说是正确的，所以你可能会觉得查看类型的问题已经被解决了，但我们不能这样草率的下定论。让我们考虑下更复杂的情况：
+
+``` cpp
+template<typename T>
+void f(const T& param);
+
+std::vector<Widget> createVec();
+
+const auto vw = createVec();
+
+if (!vw.empty()) {
+	f(&vw[0]);
+	...
+}
+```
