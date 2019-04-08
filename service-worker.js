@@ -21,11 +21,11 @@ importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox
 self.__precacheManifest = [
   {
     "url": "404.html",
-    "revision": "96d65312cea7757d6246e17a836db01d"
+    "revision": "d81460461ecd556a5cf82daa28760912"
   },
   {
-    "url": "assets/css/0.styles.1150044b.css",
-    "revision": "e0cf3df08a028ac5a6343d0dcc58705f"
+    "url": "assets/css/0.styles.9854472c.css",
+    "revision": "34c451d1b76265772efe811d94d7fbf0"
   },
   {
     "url": "assets/img/search.83621669.svg",
@@ -64,44 +64,44 @@ self.__precacheManifest = [
     "revision": "5128b537c986d15589e1c7477d819a3f"
   },
   {
-    "url": "assets/js/8.75bd0d86.js",
-    "revision": "839d27a4b43922314a45a1f71f8c906b"
+    "url": "assets/js/8.3e4dbd35.js",
+    "revision": "d1300fc5758c70f8cdfa7df296207d2f"
   },
   {
-    "url": "assets/js/9.b2395e89.js",
-    "revision": "682a2ea35064e675c53a0471e1802f19"
+    "url": "assets/js/9.38b40f6f.js",
+    "revision": "4a230c4173e2847406a82f1e4c76ed7e"
   },
   {
-    "url": "assets/js/app.821a5fb5.js",
-    "revision": "0e48750d00bf20fcd77d4823c27c68be"
+    "url": "assets/js/app.c2d7bdd2.js",
+    "revision": "f6cf519ef794b3d491f683c8bd7f8889"
   },
   {
     "url": "catalogue/chapter_1.html",
-    "revision": "ac45bfedaef2e974bcbfeee3d3f28d5e"
+    "revision": "8cbfed045e9dff27170870671a2b398f"
   },
   {
     "url": "catalogue/index.html",
-    "revision": "8118ae82c0e6780d4675697a764ec63f"
+    "revision": "3f10849904813346a9fee15e6feed349"
   },
   {
     "url": "catalogue/item_1.html",
-    "revision": "19b76f2f2cfc5ebd337df639daabce96"
+    "revision": "049c47663ba4b0374849d89ec9431bc4"
   },
   {
     "url": "catalogue/item_2.html",
-    "revision": "c43f7cdca6a9217950cacd72b03cd9df"
+    "revision": "0db18ce156f1c36cb27cb08d6f35decc"
   },
   {
     "url": "catalogue/item_3.html",
-    "revision": "3f7671fe1a28ed5d5e3d21bfa391fb0a"
+    "revision": "97fc73170258a9e0566c27f09ff2b524"
   },
   {
     "url": "catalogue/item_4.html",
-    "revision": "5e559364ff78904f6e9b90c3bdd00a29"
+    "revision": "bce7107f7fe34b35cb50f90bdc27bf3b"
   },
   {
     "url": "catalogue/using-pluging.html",
-    "revision": "dc17e4ad91267cab4aa60a23794450f8"
+    "revision": "c2daa3bdb091a4b0a7430216af683bfb"
   },
   {
     "url": "img/index.jpeg",
@@ -109,7 +109,7 @@ self.__precacheManifest = [
   },
   {
     "url": "index.html",
-    "revision": "48370c1267bf7f210a002b70b96ccfc9"
+    "revision": "93dd167ba996b0456375573d759c5f7e"
   },
   {
     "url": "logo.png",

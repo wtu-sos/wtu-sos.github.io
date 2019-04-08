@@ -44,6 +44,7 @@ module.exports = {
 		['@vuepress/blog'],
 		['@vuepress/back-to-top', true],
 	],
+	"resolutions": { "webpack-dev-middleware": "3.6.1" },
 	markdown: {
 		lineNumbers: true
 	}
