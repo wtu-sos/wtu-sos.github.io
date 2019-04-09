@@ -71,3 +71,29 @@ if (!vw.empty()) {
 ```
 
 这段代码中，涉及了用户自定义类型(Widget),一个C++s标准库容器(`std::vector`)和一个auto变量(vw)，这对于观察你的编译器类型推导过程是非常有代表性的。例如，它可以很好的展示模板类型参数T和函数f的参数param类型被推导的过程。
+
+解决问题中的类型是很简单的，只要在f中添加一些代码来显示你想看到的类型名：
+``` cpp
+template<typename T>
+void f(const T& param)
+{
+	using std::cout;
+	cout << "T =     " << typeid(T).name() << '\n';   // 显示T的类型
+	cout << "param = " << typeid(param).name() << '\n'; // 显示param的类型
+	...
+}
+```
+
+执行通过GNU或者CLANG编译器生成的执行文件会产生这样的输出：
+``` 
+T =     PK6Widget
+param = PK6Widget
+```
+我们已经知道了在这些编译器中，PK意味着"point to const",所以未知的就是那个6的意义。其实它只是表示在这之后的类型名所包含的字符数目。因此编译器告诉我们T和param的类型都是 `const Widget*`。
+微软的编译器输出为：
+```
+T =     class Widget const *
+param = class Widget const *
+```
+三个独立的编译器生成相同的信息表明信息是准确的。让我们认真观察下，在模板f中，param声明的类型是const T&.既然如此，为什么会出现T和param拥有相同类型的奇怪情况呢？假如T是一个int类型，那么param的类型应该是const int&--而不应该是相同的类型。
+不幸的是，`std::type_info::name`所输出的结果是不可靠的。例如，在这种情况下，三个编译所输出的param的类型是不正确的。此外，它的需求本质上是不正确，因为std :: type_info :: name的特化要求将类型作为by-value参数传递给模板函数。

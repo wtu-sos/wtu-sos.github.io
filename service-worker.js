@@ -21,7 +21,7 @@ importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox
 self.__precacheManifest = [
   {
     "url": "404.html",
-    "revision": "d81460461ecd556a5cf82daa28760912"
+    "revision": "30b0861257522b3f84b064bbf29a852e"
   },
   {
     "url": "assets/css/0.styles.9854472c.css",
@@ -68,40 +68,40 @@ self.__precacheManifest = [
     "revision": "d1300fc5758c70f8cdfa7df296207d2f"
   },
   {
-    "url": "assets/js/9.38b40f6f.js",
-    "revision": "4a230c4173e2847406a82f1e4c76ed7e"
+    "url": "assets/js/9.42df6f20.js",
+    "revision": "6ca46bd07a6830e29924a796c08d8239"
   },
   {
-    "url": "assets/js/app.c2d7bdd2.js",
-    "revision": "f6cf519ef794b3d491f683c8bd7f8889"
+    "url": "assets/js/app.ada7f3ae.js",
+    "revision": "1df6429a9ba811009314095ee1d1f80d"
   },
   {
     "url": "catalogue/chapter_1.html",
-    "revision": "8cbfed045e9dff27170870671a2b398f"
+    "revision": "cd31c46b19586557aa1d5e416a4483ad"
   },
   {
     "url": "catalogue/index.html",
-    "revision": "3f10849904813346a9fee15e6feed349"
+    "revision": "5efcee9ce5b9f412688b4f7b104e5ee4"
   },
   {
     "url": "catalogue/item_1.html",
-    "revision": "049c47663ba4b0374849d89ec9431bc4"
+    "revision": "ef179cd17a1fad32cebb583ba592ccbb"
   },
   {
     "url": "catalogue/item_2.html",
-    "revision": "0db18ce156f1c36cb27cb08d6f35decc"
+    "revision": "791f2fe05800f0f9d80f1786aad02bcb"
   },
   {
     "url": "catalogue/item_3.html",
-    "revision": "97fc73170258a9e0566c27f09ff2b524"
+    "revision": "801c452fc1dfc61f83bbc24f8b9468ec"
   },
   {
     "url": "catalogue/item_4.html",
-    "revision": "bce7107f7fe34b35cb50f90bdc27bf3b"
+    "revision": "c377aaef5a5b41f5164d0e49e42baa9e"
   },
   {
     "url": "catalogue/using-pluging.html",
-    "revision": "c2daa3bdb091a4b0a7430216af683bfb"
+    "revision": "8b6fa7deb4faa4cbc0fa8b925dd03f46"
   },
   {
     "url": "img/index.jpeg",
@@ -109,7 +109,7 @@ self.__precacheManifest = [
   },
   {
     "url": "index.html",
-    "revision": "93dd167ba996b0456375573d759c5f7e"
+    "revision": "cb0785165b0cf6666a7f2b52d50c8cb4"
   },
   {
     "url": "logo.png",
