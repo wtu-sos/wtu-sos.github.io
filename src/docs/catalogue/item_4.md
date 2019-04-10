@@ -96,4 +96,15 @@ T =     class Widget const *
 param = class Widget const *
 ```
 三个独立的编译器生成相同的信息表明信息是准确的。让我们认真观察下，在模板f中，param声明的类型是const T&.既然如此，为什么会出现T和param拥有相同类型的奇怪情况呢？假如T是一个int类型，那么param的类型应该是const int&--而不应该是相同的类型。
-不幸的是，`std::type_info::name`所输出的结果是不可靠的。例如，在这种情况下，三个编译所输出的param的类型是不正确的。此外，它的需求本质上是不正确，因为std :: type_info :: name的特化要求将类型作为by-value参数传递给模板函数。
+
+不幸的是，`std::type_info::name`所输出的结果是不可靠的。例如，在这种情况下，三个编译所输出的param的类型是不正确的。此外，它的需求本质上是不正确，因为std :: type_info :: name的特化要求将类型作为by-value参数传递给模板函数。正如条款1所讲述的，如果这个类型是一个引用类型，那么他的引用特性将会被忽略，在移除引用类型后如果类型是一个const类型（或者volatile类型），那么它的const特性（或者volatile特性）也会被忽略。这也是为什么参数的类型是`const Widget* const &`,却是返回`Widget const *`的原因。首先，类型的引用特性被移除了，然后移除后指针类型的常量特性（constness）也被忽略了。
+
+同样不幸的是，IDE编辑器所显示的类型信息也不可靠，或者说至少不是那么有用。同样用这个例子来说，我所知道的一个IDE编辑器所返回的T的类型是这样的（这并不是我随意编造的）：
+``` cpp 
+const _Simple_types< std::Wrap_alloc< std::_Vec_base_types<Widget, std::allocator<Widget>>::_Alloc >::value_type >::value_type *
+```
+这个编辑器显示的param的类型是：
+``` cpp 
+const _Simple_types<...>::value_type * const &
+```
+这个看起来并没有T的类型信息那么吓人，但在你意识到类型中"..."是编译器以它自己的方式告诉你"我省略了T的类型的表示"之前，这个类型信息看起来非常的令人困惑。幸运的是，你们的开发环境对这种类似的情况的处理应该会更好一些。
