@@ -10,5 +10,6 @@
   },
   "dependencies": {
     "webpack-dev-middleware": "^3.6.0"
-  }
+  },
+  "private": true
 }

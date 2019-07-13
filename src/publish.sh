@@ -1,4 +1,4 @@
-npm run docs:build
+yarn run docs:build
 
 CUR_PATH=$(cd "$(dirname "$0")";pwd)
 DIST=${CUR_PATH}"/docs/.vuepress/dist/*"
