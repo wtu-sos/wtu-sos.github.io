@@ -21,7 +21,7 @@ importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox
 self.__precacheManifest = [
   {
     "url": "404.html",
-    "revision": "b6e9178259a3fbdfa88080d9e1bb1f9c"
+    "revision": "f1b13977074b4d037a820668c4c5edf6"
   },
   {
     "url": "assets/css/0.styles.1c06bc64.css",
@@ -76,7 +76,7 @@ self.__precacheManifest = [
     "revision": "72b1a77e17d3e336cf146e4b896cb1aa"
   },
   {
-    "url": "assets/js/6.a47424f7.js",
+    "url": "assets/js/6.56c42769.js",
     "revision": "416e60260ad712444dc4ce2cf5d3ed16"
   },
   {
@@ -92,44 +92,44 @@ self.__precacheManifest = [
     "revision": "68615d96461de0a8e877900560c66326"
   },
   {
-    "url": "assets/js/app.992a6024.js",
-    "revision": "e55ebf995e6c072c7e92014b8933f432"
+    "url": "assets/js/app.0331144a.js",
+    "revision": "8da52cc4fe839ad1d4a630aacfbf237b"
   },
   {
     "url": "catalogue/effect_modern_cpp/chapter_1.html",
-    "revision": "96c75ef826066e86e7b9082ffe5be5a6"
-  },
-  {
-    "url": "catalogue/effect_modern_cpp/index.html",
-    "revision": "c2c427a0f3184ce1df5db92f99ea03cf"
+    "revision": "896c991e331776d1fee6978546bd19a7"
   },
   {
     "url": "catalogue/effect_modern_cpp/item_1.html",
-    "revision": "e5e3c206251010feb6b5f70ee984207e"
+    "revision": "2c370286d15158ff794060aac4299283"
   },
   {
     "url": "catalogue/effect_modern_cpp/item_2.html",
-    "revision": "92b7edd760dc07435ccdd457aa6eeced"
+    "revision": "6ac0852ae0fcfd1bfe5558b920fb6e73"
   },
   {
     "url": "catalogue/effect_modern_cpp/item_3.html",
-    "revision": "a5d63c7ee2bf701c98b1142524f6dba8"
+    "revision": "780bf1d4d50592db67d4bde7c2e52558"
   },
   {
     "url": "catalogue/effect_modern_cpp/item_4.html",
-    "revision": "ce8a2fa570b23e1eff5ccb8e0f9357d7"
+    "revision": "611e9258cfd8805239a0b7ce6a97def4"
   },
   {
     "url": "catalogue/effect_modern_cpp/using-pluging.html",
-    "revision": "0c67565ab9e40b06aef6401c74235134"
+    "revision": "72ee0192ece3179e2593fa2389860727"
+  },
+  {
+    "url": "catalogue/index.html",
+    "revision": "1ad3f06eb7a95e07a31d33f15a34ae9c"
   },
   {
     "url": "catalogue/others/behavior_trees_grammar_basics.html",
-    "revision": "3d43180ee5e05756fd9749e48e4f0777"
+    "revision": "808dcb0ef2836be8b802d2367f36d846"
   },
   {
     "url": "catalogue/others/read_write_problem.html",
-    "revision": "83f960fc4e75f6e4040d3918fd9b0660"
+    "revision": "eb19c49113b45b12506399a82e1f172c"
   },
   {
     "url": "img/index.jpeg",
@@ -137,7 +137,7 @@ self.__precacheManifest = [
   },
   {
     "url": "index.html",
-    "revision": "1690237f4e1eff44bb245a8f1da71529"
+    "revision": "56a650231c5e195bfef631825e0544df"
   },
   {
     "url": "logo.png",

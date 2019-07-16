@@ -41,7 +41,7 @@ module.exports = {
 						'others/behavior_trees_grammar_basics'
 					]
 				}
-			]
+			],
 		}
 		//sidebar: 'auto', // 侧边栏配置
 		//sidebarDepth: 2
