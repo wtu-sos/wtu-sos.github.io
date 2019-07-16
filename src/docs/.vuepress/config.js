@@ -24,19 +24,25 @@ module.exports = {
 			'/catalogue/': [
 				{
 					title: "Effective Modern C++",
-					collapsable: true,
+					collapsable: false,
 					children: [
-						//['', pluginIntro],
-						//'using-pluging',
-						'chapter_1',
-						'item_1',
-						'item_2',
-						'item_3',
-						'item_4'
+						'effect_modern_cpp/chapter_1',
+						'effect_modern_cpp/item_1',
+						'effect_modern_cpp/item_2',
+						'effect_modern_cpp/item_3',
+						'effect_modern_cpp/item_4'
 					]
 				},
+				{
+					title: "Others",
+					collapsable: false,
+					children: [
+						'others/read_write_problem',
+						'others/behavior_trees_grammar_basics'
+					]
+				}
 			]
-		},
+		}
 		//sidebar: 'auto', // 侧边栏配置
 		//sidebarDepth: 2
 	},

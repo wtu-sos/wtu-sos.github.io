@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>行为树语法基础 | 个人主页</title>
+    <meta name="description" content="Personal Website">
+    <link rel="icon" href="favicon.ico">
+    
+    <link rel="preload" href="/assets/css/0.styles.1c06bc64.css" as="style"><link rel="preload" href="/assets/js/app.992a6024.js" as="script"><link rel="preload" href="/assets/js/4.28fd81e4.js" as="script"><link rel="prefetch" href="/assets/js/10.5f8534cf.js"><link rel="prefetch" href="/assets/js/11.0867a1e4.js"><link rel="prefetch" href="/assets/js/12.ce023ef3.js"><link rel="prefetch" href="/assets/js/13.df3bb4eb.js"><link rel="prefetch" href="/assets/js/2.f53e62df.js"><link rel="prefetch" href="/assets/js/3.a81070ff.js"><link rel="prefetch" href="/assets/js/5.104597bf.js"><link rel="prefetch" href="/assets/js/6.a47424f7.js"><link rel="prefetch" href="/assets/js/7.52f62a72.js"><link rel="prefetch" href="/assets/js/8.e95ce831.js"><link rel="prefetch" href="/assets/js/9.07920cfc.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.1c06bc64.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">个人主页</span></a> <div class="links" style="max-width:nullpx;"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <!----></div></header> <div class="sidebar-mask"></div> <div class="sidebar"><!---->  <ul class="sidebar-links"><li><div class="sidebar-group first"><p class="sidebar-heading"><span>Effective Modern C++</span> <!----></p> <ul class="sidebar-group-items"><li><a href="/catalogue/effect_modern_cpp/chapter_1.html" class="sidebar-link">类型推导</a></li><li><a href="/catalogue/effect_modern_cpp/item_1.html" class="sidebar-link">条款1: 理解模板类型推导</a></li><li><a href="/catalogue/effect_modern_cpp/item_2.html" class="sidebar-link">条款2: 理解auto类型推导</a></li><li><a href="/catalogue/effect_modern_cpp/item_3.html" class="sidebar-link">条款3: 理解decltype</a></li><li><a href="/catalogue/effect_modern_cpp/item_4.html" class="sidebar-link">条款4 : 了解如何查看推导类型</a></li></ul></div></li><li><div class="sidebar-group"><p class="sidebar-heading open"><span>Others</span> <!----></p> <ul class="sidebar-group-items"><li><a href="/catalogue/others/read_write_problem.html" class="sidebar-link">读写问题</a></li><li><a href="/catalogue/others/behavior_trees_grammar_basics.html" class="active sidebar-link">行为树语法基础</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/catalogue/others/behavior_trees_grammar_basics.html#数据结构" class="sidebar-link">数据结构</a></li></ul></li></ul></div></li></ul> </div> <div class="page"> <div class="content"><h1 id="行为树语法基础"><a href="#行为树语法基础" aria-hidden="true" class="header-anchor">#</a> 行为树语法基础</h1> <p>行为树经常用于描述任务以及任务切换方式的。它们最初是在2004/2005左右在游戏行业引
+入的，最着名的是Damian Isla的Halo 2和Andrew Stern以及Michael Mateas的
+Façade；两者都基于机器行为与虚拟智能代理方面的预处理。主要的动机是为了创建一种这
+样的语言：
+1. 易于用图形表示和理解;
+2. 良好的执行效率
+3. 可以定向管理独立对象的因有复杂度</p> <p>它们现在经常被用于在所有类型的游戏和模拟中实现NPC AI，并且自从进化了很多.</p> <h2 id="数据结构"><a href="#数据结构" aria-hidden="true" class="header-anchor">#</a> 数据结构</h2> <p>让我们先来看一下行为树常用的数据结构。像大多数人（也包括你）所猜想的，它是树结构
+更确切地说是定向的根树，一个根节点，有向边缘，没有循环。大多数时候，行为树从根节
+点开始，自顶向下表示。由于节点的子节点的顺序具有意义，它们通常是水平对齐的，最左
+边被认为是第一个孩子，最右边是最后一个。</p> <p><img src="/assets/img/dog-behavior-tree.8d510800.jpg" alt="avatar"></p></div> <div class="page-edit"><!----> <!----></div> <div class="page-nav"><p class="inner"><span class="prev">
+        ←
+        <a href="/catalogue/others/read_write_problem.html" class="prev">
+          读写问题
+        </a></span> <!----></p></div> </div> <!----></div></div>
+    <script src="/assets/js/app.992a6024.js" defer></script><script src="/assets/js/4.28fd81e4.js" defer></script>
+  </body>
+</html>
