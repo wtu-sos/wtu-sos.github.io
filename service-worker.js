@@ -21,10 +21,10 @@ importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox
 self.__precacheManifest = [
   {
     "url": "404.html",
-    "revision": "fd384468efe4b7a605354ab90e0a4a95"
+    "revision": "cc48036f9ca9ac65195e3fd4d497dd8e"
   },
   {
-    "url": "assets/css/0.styles.1c06bc64.css",
+    "url": "assets/css/0.styles.0e8b314a.css",
     "revision": "9ea15421c257b7c2e72a5668b435969f"
   },
   {
@@ -44,92 +44,92 @@ self.__precacheManifest = [
     "revision": "83621669651b9a3d4bf64d1a670ad856"
   },
   {
-    "url": "assets/js/10.5f8534cf.js",
-    "revision": "8dfa5e5a32b98865f3fa960b662c6e21"
+    "url": "assets/js/10.0b701fec.js",
+    "revision": "b4bc2b18ce0d086c9023d5dc7cc682e2"
   },
   {
-    "url": "assets/js/11.0867a1e4.js",
-    "revision": "cc33b77d97fdd3c1736ac78ee868a5b9"
+    "url": "assets/js/11.87186876.js",
+    "revision": "29d830e9ac40bcdeec41813fb05d5eb6"
   },
   {
-    "url": "assets/js/12.ce023ef3.js",
+    "url": "assets/js/12.97dc72ac.js",
     "revision": "05c150a6a659f3fe5fd695e47306e74e"
   },
   {
-    "url": "assets/js/13.df3bb4eb.js",
+    "url": "assets/js/13.50396df9.js",
     "revision": "54abe441186bcc8b9e6150a83672bcfc"
   },
   {
-    "url": "assets/js/2.f53e62df.js",
+    "url": "assets/js/2.f81dea55.js",
     "revision": "8f265611657e1a7af270952db67ef914"
   },
   {
-    "url": "assets/js/3.476332ec.js",
-    "revision": "7d6151f15317f9970bc6ec8469f72f21"
+    "url": "assets/js/3.043cc777.js",
+    "revision": "d2a4de81d4ab39f53db4447bef2d1f25"
   },
   {
-    "url": "assets/js/4.28fd81e4.js",
-    "revision": "d195d7ebc91b21bb1ef8b8a2378cb303"
+    "url": "assets/js/4.d77f50e5.js",
+    "revision": "7e5bf1123d6ed0450dc5ae07f1793e8b"
   },
   {
-    "url": "assets/js/5.104597bf.js",
+    "url": "assets/js/5.6a6efbdf.js",
     "revision": "72b1a77e17d3e336cf146e4b896cb1aa"
   },
   {
-    "url": "assets/js/6.56c42769.js",
+    "url": "assets/js/6.17fcc2da.js",
     "revision": "416e60260ad712444dc4ce2cf5d3ed16"
   },
   {
-    "url": "assets/js/7.52f62a72.js",
-    "revision": "c37e5ccfd7dcf13f3b50bb6cef474549"
+    "url": "assets/js/7.bc180a6e.js",
+    "revision": "a5bab61013c0a7b3121419eb79ede1f6"
   },
   {
-    "url": "assets/js/8.e95ce831.js",
-    "revision": "31724c89b6a14147870200f1975077cb"
+    "url": "assets/js/8.4dda7172.js",
+    "revision": "226e78bceca2a971adacba753c2c92db"
   },
   {
-    "url": "assets/js/9.07920cfc.js",
-    "revision": "68615d96461de0a8e877900560c66326"
+    "url": "assets/js/9.4b53ecf7.js",
+    "revision": "73c2f7e6a3bbb8eec7a06e0743afd0b3"
   },
   {
-    "url": "assets/js/app.eca15868.js",
-    "revision": "18e0a71fcd90a8b2e9dd7d45febe5c73"
+    "url": "assets/js/app.50315d51.js",
+    "revision": "67df1bfea3c3b512f6d5faff74020477"
   },
   {
     "url": "catalogue/effect_modern_cpp/chapter_1.html",
-    "revision": "87a8b39703d454bbf4db5aa0e0bc745b"
+    "revision": "b76dcf8182752bdee46c4ac1d319d41c"
   },
   {
     "url": "catalogue/effect_modern_cpp/item_1.html",
-    "revision": "e184fa4b8ba4a6d7a0880cd82f9bbd05"
+    "revision": "685900034fa22abe770907dcc5019f59"
   },
   {
     "url": "catalogue/effect_modern_cpp/item_2.html",
-    "revision": "4bcd93076a44dd3e65b6b2a4954404fa"
+    "revision": "a3475c72a1e1963cd3943c19dd79098c"
   },
   {
     "url": "catalogue/effect_modern_cpp/item_3.html",
-    "revision": "9c1b0db25182413253012919770173e5"
+    "revision": "cb4fb14b4df1da27509b1e9667e1d840"
   },
   {
     "url": "catalogue/effect_modern_cpp/item_4.html",
-    "revision": "9a866b40d7eb28b1831e3de657209284"
+    "revision": "b2ccb96d61a76a451efcd73f4455c95d"
   },
   {
     "url": "catalogue/effect_modern_cpp/using-pluging.html",
-    "revision": "a333bea0a577830778512fcbc81b3498"
+    "revision": "ba6c1d17a7f3e67c518eda829f7d6159"
   },
   {
     "url": "catalogue/index.html",
-    "revision": "3585d4d0a25aaadc9dfa5acbfec4c589"
+    "revision": "ba9f2f5fca878430a1312b08e52647ad"
   },
   {
     "url": "catalogue/others/behavior_trees_grammar_basics.html",
-    "revision": "983977982d9dfaa59bee2c71c3008342"
+    "revision": "aa247303d89edaaecee3e868e59d265e"
   },
   {
     "url": "catalogue/others/read_write_problem.html",
-    "revision": "79344fe1a22a53e1b4bff6c49b4522de"
+    "revision": "74ad7add1dbf2319d359ab09b465a412"
   },
   {
     "url": "img/index.jpeg",
@@ -137,7 +137,7 @@ self.__precacheManifest = [
   },
   {
     "url": "index.html",
-    "revision": "a2d9976fc65b83ed270ecb46e925ac62"
+    "revision": "5c37f680f1700ded92bc832ce5381f44"
   },
   {
     "url": "logo.png",
